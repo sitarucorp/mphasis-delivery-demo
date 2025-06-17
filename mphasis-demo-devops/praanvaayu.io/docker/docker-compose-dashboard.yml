@@ -1,0 +1,42 @@
+services:
+  dashboard:
+    build: ./../../../mphasis-demo-dashboard/
+    ports:
+      - "8080:8081"
+      - "8081:8081"
+      - "9464:9464"
+    environment:
+      - PORT:8081
+      - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      - KAFKA_LOG4J_ROOT_LOGLEVEL=WARN
+      - KAFKA_LOG4J_TOOLS_LOGLEVEL=ERROR
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://collector:4317
+      - OTEL_EXPORTER_OTLP_PROTOCOL=grpc
+      - OTEL_TRACES_EXPORTER=otlp
+      - OTEL_METRICS_EXPORTER=prometheus
+      - OTEL_EXPORTER_PROMETHEUS_PORT=9464
+      - OTEL_SERVICE_NAME=praanvaayu
+    depends_on:
+      - backend
+  
+  backend:
+    build: ./../../../mphasis-demo-backend/
+    ports:
+      - "80:80"
+      - "9081:9081"
+      - "9564:9564"
+    environment:
+      - PORT:80
+      - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      - KAFKA_LOG4J_ROOT_LOGLEVEL=WARN
+      - KAFKA_LOG4J_TOOLS_LOGLEVEL=ERROR
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://collector:4317
+      - OTEL_EXPORTER_OTLP_PROTOCOL=grpc
+      - OTEL_TRACES_EXPORTER=otlp
+      - OTEL_METRICS_EXPORTER=prometheus
+      - OTEL_EXPORTER_PROMETHEUS_PORT=9464
+      - OTEL_SERVICE_NAME=praanvaayu
+
+
+volumes:
+  dashboard-storage:
