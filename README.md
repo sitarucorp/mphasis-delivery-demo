@@ -48,16 +48,16 @@ We in our demo try to include such endpoint and try to see if we can show the no
 
 * Java based web frontend *reactive*
     * Java 21+ (using virtual-threads drill till tomcat executor)
-    * Single Page web UI responsive design
+    * Single Page web UI responsive design (skeleton ready)
     * Hilla typescript react framework (completely java classes)
     * Vaadin java flow server (development)
     * Webclient integration to make reactive components / notifications with backend
 
 * Backend Microservices
-    * Login with JWT & Oauth2 / Authorization server
-    * Uses cache for suspension tier
-    * JPA with in memory database for persistence
-    * Kakfa (or aws kinesis ftm) for realtime streaming data
+    * -Login with JWT & Oauth2 / Authorization server
+    * -Uses cache for suspension tier
+    * R2DBC repositories with in memory H2 database for persistence (sorted repos)
+    * -Kakfa (or aws kinesis ftm) for realtime streaming data
 
 * Observability
     * OpenTelemetry (include otel javaagent and collectors)

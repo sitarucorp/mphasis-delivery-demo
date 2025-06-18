@@ -1,0 +1,39 @@
+services:
+  dashboard:
+    build: mphasis-demo-dashboard
+    expose:
+      - "80"
+      - "8081"
+    environment:
+      - PORT=80
+      - app.backend.url="http://backend/"
+    depends_on:
+      - backend
+    volumes:
+      - ./apps/:/apps:ro
+
+  backend:
+    build: mphasis-demo-backend
+    expose:
+      - "80"
+      - "8081"
+    environment:
+      - PORT=80
+    volumes:
+      - ./apps/:/apps:ro
+
+  nginx:
+    build: mphasis-demo-devops/praanvaayu.io/nginx
+    ports:
+      - "80:80"
+    expose:
+      - "80"
+    links:
+      - backend
+      - dashboard
+    depends_on:
+      - backend
+      - dashboard
+
+volumes:
+  apps:

@@ -27,9 +27,7 @@ import java.util.List;
 @PermitAll
 public class VersionView extends Main {
 
-    @Builder
-    static record Detail(String name, String value) {
-    }
+    @Builder static record Detail(String name, String value) { }
 
     VerticalLayout verticalLayout = new VerticalLayout();
     Grid<Version> history = new Grid<>(Version.class, false);

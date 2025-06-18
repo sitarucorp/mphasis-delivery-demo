@@ -3,7 +3,7 @@
 !/.idea
 # Ignore all files and directories named 'target' at the root level
 target/
-
+apps/
 # Ignore all files and directories named 'target' within subdirectories
 target/*/
 target/**/
