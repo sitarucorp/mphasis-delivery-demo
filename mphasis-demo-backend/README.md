@@ -132,3 +132,22 @@ curl -X 'POST' \
   "message": "Created"
 }
 ```
+
+#### Tomcat is running with virtual thread pool executor
+
+```bash
+2025-06-18 15:18:05 2025-06-18T09:48:05.049Z  INFO 116 --- [     virtual-78] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+```
+
+
+Repository describes below practices:
+
+- Modernization approach towards a multi module java application, eg. Trends like docker / k8s, observability, real world tests, business use case (a dashboard) etc.
+- Maven architecture to avoid dependency convergence systematically
+- Reactive relational database repositories to avoid blocking during read/write
+- Java JVM optimization for G1GC, CDS, Metaspace tuning, tired compilation, boost in performance due to use of virtual threads etc.
+- Open Telemetry optimizations
+- Documentation approach (Learning curves)
+- Applications versioning practices for chaos engineering (artifact level + api level)
+
+girish.mahajan@mphasis.com

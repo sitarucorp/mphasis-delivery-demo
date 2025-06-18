@@ -46,4 +46,4 @@ ENV JAVA_TOOL_OPTIONS="-XX:MaxRAM=512m -XX:+UseG1GC -XX:MaxGCPauseMillis=200 -XX
 
 #CMD [ "-jar", "/apps/mphasis-demo-dashboard-1.0-SNAPSHOT.jar" ]
 
-CMD [ "mvn", "spring-boot:run"]
+CMD [ "mvn", "-pl", "mphasis-demo-dashboard", "-am", "spring-boot:run"]

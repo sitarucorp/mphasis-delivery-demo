@@ -1,40 +1,61 @@
 package com.mphasis.delivery.demo.backend.config;
 
-import com.mphasis.delivery.demo.backend.handlers.LoggingInterceptor;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.lang.Nullable;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.web.SecurityFilterChain;
 
-import java.util.Objects;
-
+@EnableWebSecurity
 @Configuration
-public class WebSecurityConfig implements WebMvcConfigurer {
+public class WebSecurityConfig {
 
-    @Nullable
-    LoggingInterceptor loggingInterceptor;
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
+                .authorizeHttpRequests(auth -> auth
+                        // OpenAPI docs access
+                        .requestMatchers(
+                                "/v3/api-docs/**",
+                                "/swagger-ui/**",
+                                "/swagger-ui.html"
+                        ).permitAll()
 
-    WebSecurityConfig(@Nullable LoggingInterceptor loggingInterceptor) {
-        this.loggingInterceptor = loggingInterceptor;
-    }
+                        // Health endpoints - both direct and proxied
+                        .requestMatchers(
+                                "/howru/**",
+                                "/backend/howru/**",
+                                "/dashboard/howru/**"
+                        ).permitAll()
+                        .requestMatchers(
+                                "/version",
+                                "/backend/version")
+                        .permitAll()
 
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        if (!Objects.isNull(loggingInterceptor)) {
-            registry.addInterceptor(loggingInterceptor);
-        }
-    }
+                        // Everything else secured
+                        .anyRequest().authenticated()
+                )
 
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("swagger-ui.html")
-                .addResourceLocations("classpath:/META-INF/resources/");
+                // Disable CSRF on specific paths (stateless)
+                .csrf(csrf -> csrf
+                        .ignoringRequestMatchers(
+                                "/howru/**",
+                                "/backend/howru/**",
+                                "/dashboard/howru/**"
+                        )
+                )
 
-        registry.addResourceHandler("/index.html")
-                .addResourceLocations("classpath:/META-INF/resources/swagger-ui.html");
+                // Avoid JSESSIONID cookies for health and REST
+                .sessionManagement(sm -> sm
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                )
 
-        registry.addResourceHandler("/webjars/**")
-                .addResourceLocations("classpath:/META-INF/resources/webjars/");
+                // Optional: use HTTP Basic or something else
+                .httpBasic(Customizer.withDefaults());
+
+        return http.build();
     }
 }
+
