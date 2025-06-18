@@ -3,7 +3,9 @@ FROM maven:3-eclipse-temurin-22-alpine
 ENV TZ UTC
 ENV OTEL_VERSION=2.16.0
 
+ADD . /app/
 WORKDIR /app
+RUN mvn clean package
 
 # ADD https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/download/v${OTEL_VERSION}/opentelemetry-javaagent.jar /app/opentelemetry-javaagent.jar
 
@@ -33,13 +35,14 @@ ENV JAVA_TOOL_OPTIONS="-XX:MaxRAM=512m -XX:+UseG1GC -XX:MaxGCPauseMillis=200 -XX
 #ENV OTEL_EXPORTER_OTLP_PROTOCOL=grpc
 
 
-ENTRYPOINT [ "java", \
+#ENTRYPOINT [ "java", \
 #ENTRYPOINT [ "java", "-javaagent:/app/opentelemetry-javaagent.jar", \
 #  "-Dotel.service.name=cspreport-dashboard", \
 #  "-Dotel.metrics.exporter=otlp", \
 #  "-Dotel.traces.exporter=otlp", \
 #  "-Dotel.exporter.otlp.endpoint=http://collector:4317", \
 #  "-Dotel.instrumentation.runtime-metrics.enabled=true", \
-  "-server" ]
+#  "-server" ]
 
-CMD [ "-jar", "/apps/mphasis-demo-backend-1.0-SNAPSHOT.jar" ]
+#CMD [ "-jar", "/apps/mphasis-demo-backend-1.0-SNAPSHOT.jar" ]
+CMD [ "mvn", "spring-boot:run"]
