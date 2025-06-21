@@ -35,7 +35,7 @@ public class WebSecurityConfig {
                         .permitAll()
 
                         // Everything else secured
-                        .anyRequest().authenticated()
+                        .anyRequest().permitAll() // FIXME ting tong
                 )
 
                 // Disable CSRF on specific paths (stateless)
@@ -43,7 +43,8 @@ public class WebSecurityConfig {
                         .ignoringRequestMatchers(
                                 "/howru/**",
                                 "/backend/howru/**",
-                                "/dashboard/howru/**"
+                                "/dashboard/howru/**",
+                                "/**"
                         )
                 )
 
@@ -58,4 +59,6 @@ public class WebSecurityConfig {
         return http.build();
     }
 }
+
+
 

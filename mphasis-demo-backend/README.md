@@ -140,14 +140,15 @@ curl -X 'POST' \
 ```
 
 
-Repository describes below practices:
 
-- Modernization approach towards a multi module java application, eg. Trends like docker / k8s, observability, real world tests, business use case (a dashboard) etc.
-- Maven architecture to avoid dependency convergence systematically
-- Reactive relational database repositories to avoid blocking during read/write
-- Java JVM optimization for G1GC, CDS, Metaspace tuning, tired compilation, boost in performance due to use of virtual threads etc.
-- Open Telemetry optimizations
-- Documentation approach (Learning curves)
-- Applications versioning practices for chaos engineering (artifact level + api level)
+| Repository describes below practices                                                                                                                                 |
+|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Modernization approach towards a multi module java application, eg. Trends like docker / k8s, observability, real world tests, business use case (a dashboard) etc.  |                                
+| Maven architecture to avoid dependency convergence systematically                                                                                                    |
+| Reactive relational database repositories to avoid blocking during read/write                                                                                        |
+| Java JVM optimization for G1GC, CDS, Metaspace tuning, tired compilation, boost in performance due to use of virtual threads etc.                                    |
+| Open Telemetry optimizations                                                                                                                                         |
+| Documentation approach (Learning curves)                                                                                                                             |
+| Applications versioning practices for chaos engineering (artifact level + api level)                                                                                 |
 
 girish.mahajan@mphasis.com

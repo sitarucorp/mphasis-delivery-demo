@@ -66,6 +66,7 @@ public final class MainLayout extends AppLayout {
 
         nav.addItem(new SideNavItem("Activity", NotificationView.class, VaadinIcon.INBOX.create()));
         nav.addItem(new SideNavItem("History", HistoryView.class, VaadinIcon.ARCHIVE.create()));
+        nav.addItem(new SideNavItem("Health", HealthView.class, VaadinIcon.HEALTH_CARD.create()));
         nav.addItem(new SideNavItem("Version", VersionView.class, VaadinIcon.DASHBOARD.create()));
 
         return nav;

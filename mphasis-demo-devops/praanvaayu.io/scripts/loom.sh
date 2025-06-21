@@ -38,9 +38,9 @@ echo "Identifying ..."
 sleep 5 & spinner # ;)
 
 # Display as Java config snippet
-echo
-echo "Recommended Java Configuration:"
-echo "VirtualThreadScheduler scheduler = VirtualThreadScheduler.builder()"
-echo "    .parallelism($RECOMMENDED_PARALLELISM)"
-echo "    .maxPoolSize($RECOMMENDED_POOL_SIZE)"
-echo "    .build();"
+echo_bot "---"
+echo_bot "Recommended Java Configuration:"
+echo_bot "VirtualThreadScheduler scheduler = VirtualThreadScheduler.builder()"
+echo_bot "    .parallelism($RECOMMENDED_PARALLELISM)"
+echo_bot "    .maxPoolSize($RECOMMENDED_POOL_SIZE)"
+echo_bot "    .build();"

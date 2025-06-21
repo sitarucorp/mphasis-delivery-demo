@@ -15,3 +15,12 @@ spinner()
     done
     printf "    \b\b\b\b"
 }
+
+echo_bot() {
+  local line="$1"
+  for word in $line; do
+    echo -n "$word "
+    sleep 0.2
+  done
+  echo
+}
